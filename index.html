@@ -2,12 +2,18 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Diigo Electron App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      webview {
+        height: 100vh;
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <webview id='wv' src='https://www.diigo.com' autosize></webview>
   </body>
 </html>
