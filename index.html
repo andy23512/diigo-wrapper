@@ -15,5 +15,31 @@
   </head>
   <body>
     <webview id='wv' src='https://www.diigo.com' autosize></webview>
+    <script>
+    const webview = document.getElementById('wv')
+    webview.addEventListener('did-finish-load', () => {
+      webview.executeJavaScript(
+        `jQuery(function(){
+          const $ = jQuery
+          console.log('nanoha')
+          let count = ''
+          const interval = setInterval(() => {
+            if(count = $('.UnreadLabel .count').text()){
+              clearInterval(interval)
+              count = +count
+              console.log(count)
+              console.log(Math.ceil(count/24))
+            }
+          }, 1000)
+        })
+        `,
+        false,
+        function(result){console.log(result)}
+      )
+      webview.addEventListener('console-message', e => {
+        console.log('Guest page logged a message:', e.message)
+      })
+    })
+    </script>
   </body>
 </html>
