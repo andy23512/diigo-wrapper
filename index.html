@@ -17,6 +17,7 @@
     <webview id='wv' src='https://www.diigo.com' autosize></webview>
     <script>
     const webview = document.getElementById('wv')
+    const {shell} = require('electron').remote;
     webview.addEventListener('did-finish-load', () => {
       webview.executeJavaScript(
         `jQuery(function(){
@@ -64,6 +65,14 @@
       webview.addEventListener('console-message', e => {
         console.log('Guest page logged a message:', e.message)
       })
+      webview.addEventListener('new-window', (e) => {
+        console.log('new window event called');
+        const protocol = require('url').parse(e.url).protocol
+        if (protocol === 'http:' || protocol === 'https:') {
+          shell.openExternal(e.url)
+        }
+        return false
+	  })
     })
     </script>
   </body>
