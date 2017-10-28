@@ -19,8 +19,11 @@
     const webview = document.getElementById('wv')
     const {shell} = require('electron').remote;
     webview.addEventListener('did-finish-load', () => {
+      console.log('did-finish-load')
       webview.executeJavaScript(
         `jQuery(function(){
+          if(window.flag){ return; }
+          window.flag = true
           const $ = jQuery
           const app = {}
           let count = ''
@@ -37,6 +40,7 @@
             }
           }, 1000)
           $('<button/>').prependTo('body').text('Random!').css('position', 'fixed').css('z-index', '9999').click(() => {
+            console.log('button')
             page = Math.ceil(Math.random()*app.page_num)
             location.href = URL_add_parameter(location.href, 'page', page);
           })
@@ -62,6 +66,8 @@
         `,
         false
       )
+      if(webview.flag){ return; }
+      webview.flag = true
       webview.addEventListener('console-message', e => {
         console.log('Guest page logged a message:', e.message)
       })

@@ -14,9 +14,9 @@ function create-window
     protocol: \file:
     slashes: true
 
-  win.web-contents.open-dev-tools!
+  # win.web-contents.open-dev-tools!
 
-  win.on \closed' -> win = null
+  win.on \closed -> win = null
 
 app.on \ready create-window
 app.on \window-all-closed -> app.quit! if process.platform isnt \darwin

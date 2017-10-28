@@ -1,15 +1,19 @@
 {
-  "name": "electron-pack",
+  "name": "diigo-wrapper",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "lsc -c index.ls && electron ."
+    "start": "lsc -c index.ls && electron .",
+    "build": "lsc -c index.ls && electron-packager . diigo-wrapper"
   },
   "author": "andy23512",
   "license": "ISC",
   "dependencies": {
     "electron": "^1.4.13",
     "livescript": "^1.5.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^9.1.0"
   }
 }
